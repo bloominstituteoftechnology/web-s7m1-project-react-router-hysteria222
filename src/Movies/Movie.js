@@ -6,6 +6,7 @@ export default function Movie(props) {
   const [movie, setMovie] = useState();
 
   const { id } = useParams()
+  const { addToSavedList } = props;
 
   useEffect(() => {
     axios
@@ -20,7 +21,9 @@ export default function Movie(props) {
     // the `id` changes... How could we do this?
   }, [id]);
 
-  const saveMovie = evt => { }
+  const saveMovie = evt => {
+    addToSavedList(id)
+   }  
 
   if (!movie) {
     return <div>Loading movie information...</div>;
@@ -46,7 +49,7 @@ export default function Movie(props) {
           </div>
         ))}
       </div>
-      <div className="save-button">Save</div>
+      <div className="save-button" onClick={saveMovie}>Save</div>
     </div>
   );
 }
